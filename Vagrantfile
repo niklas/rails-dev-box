@@ -54,7 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # The developer has to run `vagrant rsync-auto` in an extra terminal. Changes
   # take 2-5 seconds to be reflected in the vm.
-  config.vm.synced_folder "./", "/home/vagrant/#{box}", type: 'rsync',
+  config.vm.synced_folder "./", "/home/vagrant/#{my_dir}", type: 'rsync',
     rsync__auto:    true,
     rsync__exclude: ".git/",
     rsync__args: [
@@ -104,7 +104,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.post_up_message = <<-EOMESSAGE
 to start the rails server you can use:
 
-  vagrant ssh --command "cd #{box} && rails server"
+  vagrant ssh --command "cd #{my_dir} && rails server"
 
 Enjoy.
   EOMESSAGE
