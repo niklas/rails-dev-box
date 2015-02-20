@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "hashicorp/precise64"
+  config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = 'develop.rails'
 
   # Disable automatic box update checking. If you disable this, then
@@ -76,7 +76,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # Always update packet sources, the vagrant box may be really old
-  config.vm.provision :shell, :inline => '/usr/bin/apt-get update -qq --yes --fix-broken'
+  config.vm.provision :shell, :inline => '/usr/bin/apt-get update -qq --yes'
 
   # setup working dir only to exploit in below
   working_dir = '/home/vagrant/puppet'
