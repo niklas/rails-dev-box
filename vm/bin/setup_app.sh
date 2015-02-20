@@ -2,15 +2,16 @@
 
 set -e
 
+app_name="rails"
 whoami
 id
 source ~/.rvm/scripts/rvm
-[ -e ~/clockwork ] || ln -sf /vagrant ~/clockwork
-rvm rvmrc warning ignore ~/clockwork/.rvmrc
-rvm rvmrc trust ~/clockwork/.rvmrc
+[ -e ~/${app_name} ] || ln -sf /vagrant ~/${app_name}
+rvm rvmrc warning ignore ~/${app_name}/.rvmrc
+rvm rvmrc trust ~/${app_name}/.rvmrc
 # TODO ramdisk
-mkdir -p ~/clockwork/log || true
-cd ~/clockwork
+mkdir -p ~/${app_name}/log || true
+cd ~/${app_name}
 source .rvmrc
 rvm info
 function createdb_unless_exists()  {
@@ -22,9 +23,9 @@ function createdb_unless_exists()  {
     createdb --template=template0 -E UTF8 $name
   fi
 }
-createdb_unless_exists clockwork_development
-createdb_unless_exists clockwork_test
-createdb_unless_exists clockwork_production
+createdb_unless_exists ${app_name}_development
+createdb_unless_exists ${app_name}_test
+createdb_unless_exists ${app_name}_production
 
 [ -r config/database.yml ] && cp -nv config/database.yml{,.previous}
 cat > config/database.yml <<-EOYAML
@@ -35,16 +36,16 @@ defaults: &defaults
   template: template0
 
 development:
-  database: clockwork_development
+  database: ${app_name}_development
   min_messages: notice
   <<: *defaults
 
 test:
-  database: clockwork_test
+  database: ${app_name}_test
   <<: *defaults
 
 production:
-  database: clockwork_production
+  database: ${app_name}_production
   <<: *defaults
 EOYAML
 #cp -nv config/application.yml{.example,}

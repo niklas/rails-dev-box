@@ -99,7 +99,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, :path => "vm/bin/setup_system.sh"
   config.vm.provision :shell, :privileged => false, :path => "vm/bin/install-rvm.sh",  :args => "stable"
   config.vm.provision :shell, :privileged => false, :path => "vm/bin/install-ruby.sh", :args => "ruby-2.2 rails-dev"
-  config.vm.provision :shell, :privileged => false, :path => "vm/bin/setup_app.sh"
+  #config.vm.provision :shell, :privileged => false, :path => "vm/bin/setup_app.sh"
 
   config.vm.post_up_message = <<-EOMESSAGE
 to start the rails server you can use:
